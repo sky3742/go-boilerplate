@@ -1,0 +1,40 @@
+@baseUrl=http://localhost:3000/api/v1
+@todoId=dca07d8a-80f9-4c71-b5da-bfd706be3703
+
+### Get all todos
+
+GET {{baseUrl}}/todos
+Content-Type: application/json
+
+### Get todo
+
+GET {{baseUrl}}/todos/{{todoId}}
+Content-Type: application/json
+
+### Create todo
+
+POST {{baseUrl}}/todos
+Content-Type: application/json
+
+{
+    "title": "test todo",
+    "completed": false
+}
+
+### Update todo
+
+PUT {{baseUrl}}/todos/{{todoId}}
+Content-Type: application/json
+
+{
+    "id": "{{todoId}}",
+    "created_at": "2024-06-06T00:39:58.000997+08:00",
+    "updated_at": "2024-06-06T00:39:58.000997+08:00",
+    "title": "todo 1",
+    "completed": true
+}
+
+### Delete todo
+
+DELETE {{baseUrl}}/todos/{{todoId}}
+Content-Type: application/json
