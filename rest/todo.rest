@@ -1,18 +1,17 @@
 @baseUrl=http://localhost:3000/api/v1
-@todoId=dca07d8a-80f9-4c71-b5da-bfd706be3703
+@todoId={{todos.response.body.data[0].id}}
 
 ### Get all todos
-
+# @name todos
 GET {{baseUrl}}/todos
 Content-Type: application/json
 
 ### Get todo
-
 GET {{baseUrl}}/todos/{{todoId}}
 Content-Type: application/json
 
 ### Create todo
-
+# @name createTodo
 POST {{baseUrl}}/todos
 Content-Type: application/json
 
@@ -22,7 +21,6 @@ Content-Type: application/json
 }
 
 ### Update todo
-
 PUT {{baseUrl}}/todos/{{todoId}}
 Content-Type: application/json
 
@@ -35,6 +33,5 @@ Content-Type: application/json
 }
 
 ### Delete todo
-
 DELETE {{baseUrl}}/todos/{{todoId}}
 Content-Type: application/json
