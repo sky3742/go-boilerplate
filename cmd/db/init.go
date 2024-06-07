@@ -8,10 +8,7 @@ import (
 	"github.com/go-gormigrate/gormigrate/v2"
 )
 
-var (
-	Migrations *gormigrate.Gormigrate
-	Seeds      *gormigrate.Gormigrate
-)
+var Migrations *gormigrate.Gormigrate
 
 func init() {
 	utils.InitEnv()
@@ -20,9 +17,6 @@ func init() {
 
 	Migrations = gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
 		files.CreateTodoTable(),
-	})
-
-	Seeds = gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
 		files.SeedTodoTable(),
 	})
 }

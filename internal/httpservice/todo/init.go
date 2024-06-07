@@ -20,10 +20,20 @@ func NewHandler(cfg ConfigHandler) *TodoHandler {
 	}
 }
 
-func (h *TodoHandler) SetRoute(app fiber.Router) {
+func (h *TodoHandler) SetPublicRoute(app fiber.Router) {
 	app.Get("/", h.GetTodos)
 	app.Get("/:id", h.GetTodo)
 	app.Post("/", h.CreateTodo)
 	app.Put("/:id", h.UpdateTodo)
 	app.Delete("/:id", h.DeleteTodo)
+}
+
+func (h *TodoHandler) SetPrivateRoute(app fiber.Router, authMiddleware fiber.Handler) {
+	app.Use(authMiddleware)
+
+	// app.Get("/", h.GetTodos)
+	// app.Get("/:id", h.GetTodo)
+	// app.Post("/", h.CreateTodo)
+	// app.Put("/:id", h.UpdateTodo)
+	// app.Delete("/:id", h.DeleteTodo)
 }

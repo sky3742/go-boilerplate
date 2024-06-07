@@ -2,28 +2,30 @@ package main
 
 import (
 	"go-boilerplate/cmd/internal"
+	"go-boilerplate/internal/middleware"
 	"go-boilerplate/internal/utils"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/healthcheck"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 func main() {
 	utils.InitEnv()
 
-	service := internal.InitServices()
-
 	server := fiber.New()
-	httpService := internal.InitHttpService(service)
+	server.Use(logger.New())
+	server.Use(healthcheck.New())
+	server.Use(recover.New())
 
 	app := server.Group("/api/v1")
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"message": "Hello, World!",
-		})
-	})
+	service := internal.InitServices()
+	httpService := internal.InitHttpService(service)
 
-	httpService.Todo.SetRoute(app.Group("/todos"))
+	httpService.Todo.SetPublicRoute(app.Group("/todos"))
+	httpService.Todo.SetPrivateRoute(app.Group("/admin/todos"), middleware.SessionMiddleware)
 
 	server.Listen(":3000")
 }

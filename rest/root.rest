@@ -1,4 +1,11 @@
-@baseUrl=http://localhost:3000/api/v1
+@baseUrl=http://localhost:3000
 
-GET {{baseUrl}}
+### Readyz
+
+GET {{baseUrl}}/readyz
+Content-Type: application/json
+
+### Livez
+
+GET {{baseUrl}}/livez
 Content-Type: application/json

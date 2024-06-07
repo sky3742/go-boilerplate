@@ -2,10 +2,7 @@ package todo
 
 import (
 	"go-boilerplate/internal/repository"
-	todoRepo "go-boilerplate/internal/repository/todo"
 	"go-boilerplate/internal/service"
-
-	"gorm.io/gorm"
 )
 
 type todoService struct {
@@ -20,10 +17,4 @@ func NewTodoService(cfg TodoServiceConfig) service.Todo {
 	return &todoService{
 		TodoRepo: cfg.TodoRepo,
 	}
-}
-
-func InitTodoService(db *gorm.DB) service.Todo {
-	return NewTodoService(TodoServiceConfig{
-		TodoRepo: todoRepo.NewTodoRepo(db),
-	})
 }
