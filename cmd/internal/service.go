@@ -4,6 +4,7 @@ import (
 	repoTodo "go-boilerplate/internal/repository/todo"
 	"go-boilerplate/internal/service"
 	servTodo "go-boilerplate/internal/service/todo"
+	"go-boilerplate/internal/utils"
 )
 
 type Service struct {
@@ -11,7 +12,7 @@ type Service struct {
 }
 
 func InitServices() *Service {
-	db := InitDB()
+	db := utils.InitDB(utils.Config.DatabaseUrl)
 
 	// repository
 	todoRepo := repoTodo.NewTodoRepo(db)

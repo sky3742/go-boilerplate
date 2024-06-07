@@ -28,5 +28,4 @@ go.work.sum
 /tmp/
 
 # DB generated files
-*.db-shm
-*.db-wal
+*.db*
